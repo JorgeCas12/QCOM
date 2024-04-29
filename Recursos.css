@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(428687716_1464336300933623_2035624644340631203_n.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+
+
+.wrapper{
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(18, 17, 17, 0.872);
+  backdrop-filter: blur(9px);
+  color: rgb(0, 0, 0);
+  border-radius: 12px;
+  padding: 30px 40px;
+}
+
+.wrapper h1{
+  font-size: 36px;
+  text-align: center;
+}
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+  }
+  .wrapper .box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    
+    margin: 10px 0;
+  }
+
+  .faield{
+
+    margin: auto;
+    width: 640px; 
+    padding: 50px;
+    font-family: 'Arial', sans-serif; 
+    
+  }
+
+  .box {
+    width: 100%;
+    height: 100%;
+    background: rgba(red, green, blue, alpha);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: hsla(0, 0%, 0%, 0.918);
+    padding: 20px 45px 20px 20px;
+  }
+  .box.time {
+    width: 10%;
+    height: 10%;
+    background: rgba(red, green, blue, alpha);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: hsla(0, 0%, 0%, 0.918);
+    padding: 20px 45px 20px 20px;
+  }
+
+  .value{
+    color: hsla(0, 0%, 0%, 0.918);
+  }
+
+.button.is-primary{
+    width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #090101;
+  font-weight: 600;
+}
+
+.button.is-danger{
+    width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}

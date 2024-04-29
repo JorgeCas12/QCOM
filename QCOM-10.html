@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <title> Formulario</title>
+        <link
+          rel="stylesheet"
+          href="Recursos.css"
+          
+        />
+    </head>
+<body>
+<div class="wrapper">
+    
+        <form id="form"  method="POST">
+       
+       
+
+         <h1 class="title">DATOS DEL CLIENTE</h1> 
+         
+           <div>
+           <label for="Numero de cliente"><b>Numero de cliente:</b></label>
+           <input type="text" required id="Numero de cliente" placeholder="Numero de cliente" class="box" name="Numero de cliente">
+           </div>
+   
+           <div>
+           <label for="Nombre"><b>Nombre:</b></label>
+           <input type="text" required id="Nombre" placeholder="Nombre" class="box" name="Nombre">
+           </div>
+   
+           <div>
+           <label for="Telefono"><b>Telefono:</b></label>
+           <input type="text" required id="Telefono" placeholder="Telefono" class="box" name="Telefono">
+           </div>
+   
+           <div>
+             <label for="Direccion"><b>Direccion:</b></label>
+             <input type="text" required id="Direccion" placeholder="Direccion" class="box" name="Direccion">
+           </div>
+           
+            <div>
+           <label for="Disponibilidad de horario"><b>Disponibilidad de horario:</b></label>
+           <input type="text" required id="Disponibilidad de horario" value="00:00 - 00:00" type="reset"  required 
+                   class="box" name="Disponibilidad de horario"/>
+                   
+           </div>
+   
+           
+
+           <div> 
+             <label for="Ubicacion"><b>Ubicacion del domicilio (Link o Coordenadas):</b></label>
+            
+             <p><small>En el apartado de Instrucciones se observa la manera de obtener las coordenadas</small></p>
+
+             <input type="text" required id="Ubicacion" placeholder="Ubicacion" class="box" name="Ubicacion">
+             <a class="btn-1" href="https://www.youtube.com/watch?v=356ojS2amsw" target="_black" >Instrucciones</a>
+           </div>
+           
+            <div>
+             <label for="Comentarios"><b>Comentarios:</b></label>
+             <input typetextarea class="box" placeholder="Comentarios" name="Comentarios">
+           </div>
+           
+           <div class="control">
+             <button class="button is-primary" type="submit" id="submit-button">
+               Enviar
+             </button>
+           </div>
+           <div class="control">
+             <button class="button is-danger">Cancelar</button>
+           </div>
+           <div
+         id="message"
+         style="
+           display: none;
+           margin: 20px;
+           font-weight: bold;
+           color: rgb(255, 255, 255);
+           padding: 8px;
+           background-color: rgb(55, 199, 36);
+           border-radius: 4px;
+           border-color: rgb(250, 247, 246);
+         "
+       ></div>
+       </form>
+   
+
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        document.getElementById("message").textContent = "Submitting..";
+        document.getElementById("message").style.display = "block";
+        document.getElementById("submit-button").disabled = true;
+        
+  
+        // Collect the form data
+        var formData = new FormData(this);
+        var keyValuePairs = [];
+        for (var pair of formData.entries()) {
+          keyValuePairs.push(pair[0] + "=" + pair[1]);
+        }
+  
+        var formDataString = keyValuePairs.join("&");
+  
+        // Send a POST request to your Google Apps Script
+        fetch(
+          "https://script.google.com/macros/s/AKfycbzZn4ulILXhct6JXCKRYBogBCN1kqeSE3AX8x4BTBefvUk4Z4HTqdc8FgleIxfhL2gi/exec",
+          {
+            redirect: "follow",
+            method: "POST",
+            body: formDataString,
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+          }
+        )
+          .then(function (response) {
+            // Check if the request was successful
+            if (response) {
+              return response; // Assuming your script returns JSON response
+            } else {
+              throw new Error("Failed to submit the form.");
+            }
+          })
+          .then(function (data) {
+            // Display a success message
+            document.getElementById("message").textContent =
+              "Data submitted successfully!";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("message").style.backgroundColor = "red";
+            document.getElementById("message").style.color = "beige";
+            document.getElementById("submit-button").disabled = false;
+            document.getElementById("form").reset();
+  
+            setTimeout(function () {
+              document.getElementById("message").textContent = "";
+              document.getElementById("message").style.display = "none";
+            }, 2600);
+          })
+          .catch(function (error) {
+            // Handle errors, you can display an error message here
+            console.error(error);
+            document.getElementById("message").textContent =
+              "An error occurred while submitting the form.";
+            document.getElementById("message").style.display = "block";
+          });
+      });
+
+
+      
+$(function() {
+  $('input[name="Disponibilidad de horario"]').daterangepicker({
+    opens: 'left',
+   
+    timePicker: true,
+            timePicker12Hour: true,
+            timePickerIncrement: 1,
+    locale: {
+                format: 'HH:mm'
+            }
+            
+  }, function(start, end, label) {
+    console.log("A new time selection was made: " + start.format('HH:mm;') + ' to ' + end.format('HH:mm')) ;
+  }).on('show.daterangepicker', function (ev, picker) {
+            picker.container.find(".calendar-table").hide();
+        });;
+});
+
+
+    </script>
+
+    
+  
+  </body>
+  <html>
+      
+</div>
+    
+</body>
+</html>
+
